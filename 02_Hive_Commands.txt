@@ -1,0 +1,26 @@
+hdfs dfs -mkdir -p /user/hive/warehouse
+./run-hivemetastore.sh -s start
+./run-hiveserver2.sh -s start
+hive
+show databases;
+create database twitter;
+use twitter;
+
+
+create table twit (
+    tw_date string,
+    id int,
+    url string,
+    username string,
+    source string,
+    location string,
+    tweet string,
+    num_of_likes int,
+    num_of_retweet int)
+    ROW FORMAT DELIMITED
+    FIELDS TERMINATED BY ','
+	tblproperties("skip.header.line.count"="1");
+	
+	
+	
+LOAD DATA LOCAL INPATH '/home/talentum/shared/filename.csv' INTO TABLE twit; 
